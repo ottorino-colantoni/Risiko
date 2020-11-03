@@ -1,5 +1,5 @@
 from django.test import TestCase
-from .Models import RiskTimer, Die, diceShaker
+from .Model import RiskTimer, Die, diceShaker, Player, Territory
 from threading import Timer
 import time
 
@@ -64,3 +64,17 @@ class diceShakerTests(TestCase):
         riskDiceShaker.rollDice(3)
         results = riskDiceShaker.getSortDiceResults()
         print(results)
+
+######### Test relationships between Player and Territory
+class playerTerritoryTest(TestCase):
+    player1 = Player.Player("John", "blu")
+    player2 = Player.Player("Jade", "yellow")
+    territory1 = Territory.Territory("Italy", 19)
+    territory1.setOwner(player1)
+    print(str(territory1.getNameID()) + " " + str(territory1.getOwnerID()) + " " + str(territory1.getArmiesnumber()))
+    territory1.modifyTerritoryArmies(8)
+    territory1.setOwner(player2)
+    print(str(territory1.getNameID()) + " " + str(territory1.getOwnerID()) + " " + str(territory1.getArmiesnumber()))
+
+
+
