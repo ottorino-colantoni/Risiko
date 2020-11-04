@@ -10,6 +10,7 @@ class Attack:
         self.attackingTerritory = atkTerr
         self.defendingTerritory = defTerr
         self.attackingArmies = atkArmies
+        self.result = None
 
     def setDefendingArmies(self, defArmies: int):
         self.defendingArmies = defArmies
@@ -49,7 +50,9 @@ class Attack:
             self.defendingTerritory.setArmiesNumber(self.defendingArmies-defLosses)
 
 
-        res = Result(atkLosses, defLosses, conquered)
+        self.result = Result(atkLosses, defLosses, conquered)
+
+        return self.result
 
 
 
