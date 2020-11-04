@@ -1,3 +1,6 @@
+from Risiko.Model.Territory import Territory
+
+
 class Result:
 
     def __init__(self, atkTerr: Territory, defTerr: Territory, atkArmies: int):
