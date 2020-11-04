@@ -1,5 +1,5 @@
 from django.test import TestCase
-from Risiko.Model import RiskTimer, Die, diceShaker, Player, Territory
+from Risiko.Model import Timer, Die, diceShaker, Player, Territory
 from threading import Timer
 import time
 
@@ -24,21 +24,21 @@ class RiskTimerTests(TestCase):
 
    def test_verify_remaining_time_and_singleton_instance(self):
 
-       test_timer = RiskTimer.RiskTimer.getInstance()
+       test_timer = Timer.Timer.getInstance()
        test_timer.setRemainingTime(10)
        test_timer.startTimer(self.helloWorld)
        print(test_timer.getRemainingTime())
        print(test_timer.getStartedAt())
        time.sleep(4)
        test_timer.pauseTimer()
-       test_timer2 = RiskTimer.RiskTimer.getInstance()
+       test_timer2 = Timer.Timer.getInstance()
        print(test_timer.getRemainingTime())
        print(test_timer2.getRemainingTime())
        test_timer.resumeTimer(self.helloWorld)
 
 
    def test_verify_stop_function(self):
-        test_timer = RiskTimer.RiskTimer.getInstance()
+        test_timer = Timer.Timer.getInstance()
         test_timer.setRemainingTime(10)
         test_timer.startTimer(self.helloWorld)
         test_timer.stopTimer()

@@ -2,7 +2,7 @@ from threading import Timer
 import time
 
 
-class RiskTimer:
+class Timer:
 
     __instance = None
     __timeRemaining = None
@@ -11,18 +11,18 @@ class RiskTimer:
 
     @staticmethod
     def getInstance():
-        if RiskTimer.__instance == None:
-            RiskTimer()
-        return RiskTimer.__instance
+        if Timer.__instance == None:
+            Timer()
+        return Timer.__instance
 
     def __init__(self):
-        if RiskTimer.__instance != None:
+        if Timer.__instance != None:
             raise Exception("This class is a Singleton")
         else:
             self.__timeRemaining = None
             self.__startedAt = None
             self.__phaseTimer = None
-            RiskTimer.__instance = self
+            Timer.__instance = self
 
     def startTimer(self, method):
 
