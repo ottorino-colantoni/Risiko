@@ -42,7 +42,7 @@ class Continent:
         playerTerritory = []
         for key in self.__continentTerritories:
             if playerId == self.__continentTerritories[key].getOwnerID():
-                playerTerritory.add(self.__continentTerritories[key])
+                playerTerritory.append(self.__continentTerritories[key])
 
         if not playerTerritory:
             return str(playerId) + " has not territory in " + str(self.getContinentId())
