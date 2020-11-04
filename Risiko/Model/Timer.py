@@ -1,4 +1,4 @@
-from threading import Timer
+from threading import Timer as thredingTimer
 import time
 
 
@@ -27,7 +27,7 @@ class Timer:
     def startTimer(self, method):
 
         self.__startedAt = time.time()
-        self.__phaseTimer = Timer(self.__timeRemaining, method)
+        self.__phaseTimer = thredingTimer(self.__timeRemaining, method)
         self.__phaseTimer.start()
 
     def pauseTimer(self):
@@ -35,7 +35,7 @@ class Timer:
         self.__phaseTimer.cancel()
 
     def resumeTimer(self, method):
-        self.__phaseTimer = Timer(self.__timeRemaining, method)
+        self.__phaseTimer = thredingTimer(self.__timeRemaining, method)
         self.__phaseTimer.start()
         self.__startedAt = time.time()
 

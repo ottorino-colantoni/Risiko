@@ -1,6 +1,6 @@
 from django.test import TestCase
 from Risiko.Model import Timer, Die, diceShaker, Player, Territory, Attack
-from threading import Timer
+#from threading import Timer
 import time
 
 # Run all the tests in the animals.tests module
