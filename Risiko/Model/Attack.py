@@ -18,8 +18,9 @@ class Attack:
     def rollDice(self, armiesNumber: int):
         diceShak = diceShaker.getInstance()
         diceShak.rollDice(armiesNumber)
-        #ritorna i dadi tirati, ordinati in ordine crescente
-        return (diceShak.getDiceResults()).sort(reverse=True)
+        diceResult = diceShak.getDiceResults()
+        diceResult.sort(reverse = True)
+        return diceResult
 
     def calculateResult(self):
         conquered = False
@@ -42,12 +43,12 @@ class Attack:
             #ASK TO THE ATTACKING PLAYER HOW MANY ARMIES HE WANTS TO MOVE TO THE CONQUERED TERRITORY
             #AT THE MOMENT HE MOVES ALL THE REMAINING ATK ARMIES FROM THE FIGHT
             movedArmies = self.attackingArmies-atkLosses
-            self.attackingTerritory.setArmiesNumber(self.attackingTerritory-movedArmies)
+            self.attackingTerritory.modifyTerritoryArmies(movedArmies)
             self.defendingTerritory.setArmiesNumber(movedArmies)
 
         else:
-            self.attackingTerritory.setArmiesNumber(self.attackingTerritory-atkLosses)
-            self.defendingTerritory.setArmiesNumber(self.defendingArmies-defLosses)
+            self.attackingTerritory.modifyTerritoryArmies(atkLosses)
+            self.defendingTerritory.modifyTerritoryArmies(defLosses)
 
 
         self.result = Result(atkLosses, defLosses, conquered)

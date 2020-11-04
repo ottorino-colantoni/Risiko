@@ -12,7 +12,7 @@ class diceShaker:
             diceShaker()
         else:
             diceShaker.__diceResults = []
-            return diceShaker.__instance
+        return diceShaker.__instance
 
     def __init__(self):
         if diceShaker.__instance != None:
