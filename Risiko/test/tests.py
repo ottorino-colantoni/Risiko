@@ -68,6 +68,7 @@ class diceShakerTests(TestCase):
 
 ######### Test relationships between Player and Territory
 class playerTerritoryTest(TestCase):
+
     player1 = Player.Player("John", "blu")
     player2 = Player.Player("Jade", "yellow")
     territory1 = Territory.Territory("Italy", 19)

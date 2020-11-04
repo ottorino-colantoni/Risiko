@@ -2,8 +2,7 @@ from .Territory import Territory
 
 class Continent:
 
-
-    __continentTerritories =  {}
+    __continentTerritories = {}
     __continentId = None
     __isConquered = False
 
@@ -12,12 +11,11 @@ class Continent:
         self.__continent = {}
         self.__isConquered = False
 
-
     def addTerritory(self, territory : Territory):
         self.__continentTerritories[territory.getNameID()]= territory
 
     def getContinentId(self):
-        return self.getContinentId
+        return self.__continentId
 
     def getContinentTerritory(self):
         return self.__continentTerritories
@@ -27,6 +25,7 @@ class Continent:
             if territory.getNameID() == self.__continentTerritories[key].getNameID():
                 return True
 
+    # The function use only the playerId and not the full instance !!!! TODO : what return??
     def isConquered(self):
         owner = None
         for key in self.__continentTerritories:
@@ -38,8 +37,7 @@ class Continent:
         self.__isConquered = True
         return self.__isConquered
 
-
-
+    # The function use only the playerId and not the full instance !!!! TODO : what return??
     def getPlayerTerritory(self, playerId):
         playerTerritory = []
         for key in self.__continentTerritories:
@@ -47,9 +45,16 @@ class Continent:
                 playerTerritory.add(self.__continentTerritories[key])
 
         if not playerTerritory:
-            return (str(playerId)+ " has not territory in " + str(self.getContinentId()))
+            return str(playerId) + " has not territory in " + str(self.getContinentId())
         else:
             return playerTerritory
+
+    # The function use only the playerId and not the full instance !!! TODO : what return??
+    def findTerritory(self, territoryID):
+        if territoryID in self.__continentTerritories:
+            return self.__continentTerritories[territoryID]
+        else:
+            return str(territoryID) + " is not in " + str(self.getContinentId())
 
 
 
