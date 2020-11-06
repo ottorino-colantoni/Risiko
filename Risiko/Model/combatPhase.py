@@ -4,6 +4,8 @@ from .Timer import Timer
 
 # timer method, this will be necessary in the future to implement
 
+
+
 class combatPhase(object):
     def __init__(self, combatTimeSeconds: int):
         self.timer = Timer.getInstance()
@@ -17,6 +19,7 @@ class combatPhase(object):
     def emptyTimerFunction(self):
         print("hellWorld")
 
+
     def makeAttack(self,attackingTerritory: Territory, defendingTerritory: Territory, attackingArmiesNumber: int):
         self.timer.pauseTimer()
         self.currentAttack = Attack(attackingTerritory, defendingTerritory, attackingArmiesNumber)
@@ -28,4 +31,4 @@ class combatPhase(object):
         self.attacks.append(self.currentAttack)
         self.currentAttack = None
 
-        self.timer.resumeTimer(self.emptyTimerFunction())
+        self.timer.resumeTimer(self.emptyTimerFunction)

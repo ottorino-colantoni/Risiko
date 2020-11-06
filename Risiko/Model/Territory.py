@@ -3,14 +3,10 @@ from .Player import Player
 
 class Territory:
 
-    __nameID = None
-    __armiesNumber = None
-    __owner = None
-    __neighbors = []
 
-    def __init__(self, name, armies):
+    def __init__(self, name):
         self.__nameID = name
-        self.__armiesNumber = armies
+        self.__armiesNumber = 0
         self.__owner = None
         self.__neighbors = []
 
@@ -47,17 +43,26 @@ class Territory:
     def modifyTerritoryArmies(self, lostArmies):
         self.__armiesNumber = self.__armiesNumber - lostArmies
 
-    def getNeighbords(self):
+    def getNeighbors(self):
         return self.__neighbors
 
-    def addNeighbords(self, neighbord):
-        self.__neighbors.append(neighbord)
+    # This function add neighbors to the territory instance
+    # Parameter:
+    #   @neighbor = List[]
+    def addNeighbors(self, neighbor : []):
+        if neighbor == None:
+            raise Exception(" Can not be Null value")
+        for territory in neighbor:
+            self.__neighbors.append(territory)
 
-    def hasNeighbord(self, neighbord ):
+    def hasNeighbor(self, neighbor):
+        find = False
         for ng in self.__neighbors:
-            if neighbord.getNameID() == ng.getNameID():
-                return True
-        return False
+            if neighbor.getNameID() == ng.getNameID():
+                find = True
+                break
+        return find
+
     def printNeighbords(self):
         for ng in self.__neighbors:
             print(str(ng.getNameID()) + " " + str(ng.getArmiesNumber()) + " " + str(ng.getOwnerID()))

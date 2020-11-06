@@ -5,9 +5,6 @@ import time
 class Timer:
 
     __instance = None
-    __timeRemaining = None
-    __startedAt = None
-    __phaseTimer = None
 
     @staticmethod
     def getInstance():

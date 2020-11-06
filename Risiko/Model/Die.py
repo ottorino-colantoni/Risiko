@@ -1,8 +1,7 @@
 import random
 
-class Die:
 
-    __faceValue = None
+class Die:
 
     def __init__(self):
         self.__faceValue = None
