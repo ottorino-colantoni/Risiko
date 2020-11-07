@@ -33,7 +33,8 @@ class Board:
         for key in self.__continetMap:
             print(key)
             for territory in self.__continetMap[key].getContinentTerritory():
-                print(str(key) + " " + str(territory))
+                print(str(key) + " " + str(territory) + " " + str(self.__continetMap[key].getContinentTerritory()[territory].getOwner().getNickName())
+                      + " " + str(self.__continetMap[key].getContinentTerritory()[territory].getArmiesNumber()))
 
 
     def getContinentMap(self):
@@ -75,7 +76,7 @@ class Board:
 
     def getAttackableTerritories(self, territoryID):
 
-        find = self.findTerritory()
+        find = self.findTerritory(territoryID)
         attackableTerritories = []
         for neighbor in find.getNeighbors():
             if find.getOwner() !=  neighbor.getOwner():

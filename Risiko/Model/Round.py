@@ -10,6 +10,15 @@ class Round:
         self.__roundPlayer = player
 
 
+    def getBoard(self):
+        return self.__board
+
+    def getRoundPlayer(self):
+        return self.__roundPlayer
+
+    def getCombatPhase(self):
+        return self.cPhase
+
     def enterAttackingTerritory(self, territoryID):
 
          return self.__board.getAttackableTerritories(territoryID)
@@ -31,7 +40,7 @@ class Round:
     def startCombatPhase(self):
 
         #TODO: time remaining Timer !!!!
-        self.cPhase = combatPhase(30)
+        self.cPhase = combatPhase(500000)
         return self.__board.getAttackingTerritories(self.__roundPlayer.getNickName())
 
 

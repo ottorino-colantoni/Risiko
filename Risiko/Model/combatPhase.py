@@ -16,6 +16,11 @@ class combatPhase(object):
         self.timer.startTimer(self.emptyTimerFunction)
 
     # timer method, this will be necessary in the future to implement
+
+    def getAttacks(self):
+        return self.attacks
+
+
     def emptyTimerFunction(self):
         print("hellWorld")
 

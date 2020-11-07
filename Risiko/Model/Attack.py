@@ -12,6 +12,9 @@ class Attack:
         self.attackingArmies = atkArmies
         self.result = None
 
+    def getResult(self):
+        return self.result
+
     def setDefendingArmies(self, defArmies: int):
         self.defendingArmies = defArmies
 
@@ -19,7 +22,7 @@ class Attack:
         diceShak = diceShaker.getInstance()
         diceShak.rollDice(armiesNumber)
         diceResult = diceShak.getDiceResults()
-        diceResult.sort(reverse = True)
+        diceResult.sort(reverse=True)
         return diceResult
 
     def calculateResult(self):
