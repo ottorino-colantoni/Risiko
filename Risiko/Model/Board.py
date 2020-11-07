@@ -49,6 +49,59 @@ class Board:
         self.__mapId = newId
 
 
+    def getAttackingTerritories(self, playerID):
+        # TODO: modify for fun
+
+        attackingTerritories = []
+
+        for continent in self.__continetMap:
+            continentTerritories = self.__continetMap[continent].getPlayerTerritories(playerID)
+            if continentTerritories != None:
+                attackingTerritories += continentTerritories
+
+        for atkTerritory in attackingTerritories:
+            remove = True
+            if atkTerritory.getArmiesNumber() > 1:
+                for neighbor in atkTerritory.getNeighbors():
+                    if neighbor.getOwner != playerID:
+                        remove = False
+                        break
+                if remove:
+                    attackingTerritories.remove(atkTerritory)
+            else:
+                attackingTerritories.remove(atkTerritory)
+
+        return attackingTerritories
+
+    def getAttackableTerritories(self, territoryID):
+
+        find = self.findTerritory()
+        attackableTerritories = []
+        for neighbor in find.getNeighbors():
+            if find.getOwner() !=  neighbor.getOwner():
+                attackableTerritories.append(neighbor)
+
+        return attackableTerritories
+
+
+    def findTerritory(self, territoryID):
+        find = None
+        for continent in self.__continetMap:
+            find = self.__continetMap[continent].findTerritory(territoryID)
+            if (find != None):
+                break
+
+        if(find == None):
+            raise Exception("Territory not found")
+
+        return find
+
+
+
+
+
+
+
 
 
 

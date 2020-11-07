@@ -38,23 +38,23 @@ class Continent:
         return self.__isConquered
 
     # The function use only the playerId and not the full instance !!!! TODO : what return??
-    def getPlayerTerritory(self, playerId):
-        playerTerritory = []
+    def getPlayerTerritories(self, playerId):
+        playerTerritories = []
         for key in self.__continent:
             if playerId == self.__continent[key].getOwnerID():
-                playerTerritory.append(self.__continent[key])
+                playerTerritories.append(self.__continent[key])
 
-        if not playerTerritory:
-            return str(playerId) + " has not territory in " + str(self.getContinentId())
+        if not playerTerritories:
+            return None
         else:
-            return playerTerritory
+            return playerTerritories
 
     # The function use only the playerId and not the full instance !!! TODO : what return??
     def findTerritory(self, territoryID):
         if territoryID in self.__continent:
             return self.__continent[territoryID]
         else:
-            return str(territoryID) + " is not in " + str(self.getContinentId())
+            return None
 
 
 
