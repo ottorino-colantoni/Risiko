@@ -35,8 +35,8 @@ class TestRound(TestCase):
             turn = Round.Round(random.choice(players))
             print("Il giocatore di turno è: " + str(turn.getRoundPlayer().getNickName()))
             if turn.startCombatPhase():
-                returnTerritory = turn.startCombatPhase()
-                for territory in returnTerritory:
+                returnTerritories = turn.startCombatPhase()
+                for territory in returnTerritories:
                     print(territory.getNameID(), end=" ")
                 print("\n")
                 atk_ter_id = input("Seleziona il territorio dal quale iniziare l'attacco: ")
