@@ -20,20 +20,34 @@ class Round:
         return self.cPhase
 
     def enterAttackingTerritory(self, territoryID):
-
-         return self.__board.getAttackableTerritories(territoryID)
+        try:
+            return self.__board.getAttackableTerritories(territoryID)
+        except:
+            print("TERRITORIO D'ATTACCO NON CORRETTO!!!!")
 
 
     def confirmAttack(self, attackingTerritoryID, defendingTerritoryID, attackingArmiesNumber):
 
-        atkTerritory = self.__board.findTerritory(attackingTerritoryID)
-        dfnTerritory = self.__board.findTerritory(defendingTerritoryID)
-        self.cPhase.makeAttack(atkTerritory, dfnTerritory, attackingArmiesNumber)
+        try:
+            atkTerritory = self.__board.findTerritory(attackingTerritoryID)
+        except:
+            print("Il territorio d'attacco non è corretto")
+            return
+        try:
+            dfnTerritory = self.__board.findTerritory(defendingTerritoryID)
+        except:
+            print("Il territorio di difesa non è corretto")
+            return
+        try:
+            self.cPhase.makeAttack(atkTerritory, dfnTerritory, attackingArmiesNumber)
+        except:
+            raise Exception("Errore nelle armate in attacco")
 
         #TODO: Notify defender player
 
 
     def enterDefendingArmies(self, defendingArmiesNumber):
+
 
         self.cPhase.fight(defendingArmiesNumber)
 

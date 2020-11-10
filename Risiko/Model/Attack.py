@@ -15,6 +15,9 @@ class Attack:
     def getResult(self):
         return self.result
 
+    def getDefendingTerritory(self):
+        return self.defendingTerritory
+
     def setDefendingArmies(self, defArmies: int):
         self.defendingArmies = defArmies
 

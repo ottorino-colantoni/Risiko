@@ -53,14 +53,15 @@ class Board:
     def getAttackingTerritories(self, playerID):
         # TODO: modify for fun
 
-        attackingTerritories = []
+        playerTerritories = []
 
         for continent in self.__continetMap:
             continentTerritories = self.__continetMap[continent].getPlayerTerritories(playerID)
             if continentTerritories != None:
-                attackingTerritories += continentTerritories
+                playerTerritories += continentTerritories
+        attackingTerritories = playerTerritories.copy()
 
-        for atkTerritory in attackingTerritories:
+        for atkTerritory in playerTerritories:
             remove = True
             if atkTerritory.getArmiesNumber() > 1:
                 for neighbor in atkTerritory.getNeighbors():
@@ -72,11 +73,15 @@ class Board:
             else:
                 attackingTerritories.remove(atkTerritory)
 
+
         return attackingTerritories
 
     def getAttackableTerritories(self, territoryID):
+        try:
+            find = self.findTerritory(territoryID)
+        except:
+            raise Exception("Wrong Atk Territory")
 
-        find = self.findTerritory(territoryID)
         attackableTerritories = []
         for neighbor in find.getNeighbors():
             if find.getOwner() !=  neighbor.getOwner():

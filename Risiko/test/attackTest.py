@@ -32,5 +32,6 @@ class attackTest(TestCase):
 
         res = atk.calculateResult()
         print(res)
+
         print(f'In "{ter1.getNameID()}" dopo l\'attacco ci sono {ter1.getArmiesNumber()} armate')
         print(f'In "{ter2.getNameID()}" dopo l\'attacco ci sono {ter2.getArmiesNumber()} armate')
