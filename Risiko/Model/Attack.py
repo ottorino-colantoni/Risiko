@@ -4,7 +4,6 @@ from .Result import Result
 
 class Attack:
 
-    defendingArmies = None
 
     def __init__(self, atkTerr: Territory, defTerr: Territory, atkArmies: int):
         self.attackingTerritory = atkTerr

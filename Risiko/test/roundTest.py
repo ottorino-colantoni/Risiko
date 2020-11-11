@@ -70,10 +70,10 @@ def selectAttackArmiesNumber(listatkTerr):
 
 def setUP():
     player1 = Player.Player("Livioski", "blu")
-    player2 = Player.Player("Carlatt", "orange")
-    player3 = Player.Player("bigFabbro", "yellow")
-    player4 = Player.Player("zar", "red")
-    players =[player1, player2, player3, player4]
+    #player2 = Player.Player("Carlatt", "orange")
+    #player3 = Player.Player("bigFabbro", "yellow")
+    player4 = Player.Player("Zar", "red")
+    players =[player1, player4]
     classicBuilder1 = classicBoardBuilder.classicBoardBuilder()
     Board.Board.setBoardBuilder(classicBuilder1)
     board1 = Board.Board.getInstance()
@@ -89,7 +89,7 @@ class TestRound(TestCase):
 
     def test_round(self):
         board = setUP()
-        player4 = Player.Player("zar", "red")
+        player4 = Player.Player("Zar", "red")
         player1 = Player.Player("Livioski", "blu")
         player2 = Player.Player("Carlatt", "orange")
         player3 = Player.Player("bigFabbro", "yellow")

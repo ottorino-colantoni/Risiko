@@ -43,12 +43,11 @@ class Round:
         except:
             raise Exception("Errore nelle armate in attacco")
 
-        #TODO: Notify defender player
+        # TODO : needed for contact the client
+        return self.cPhase.currentAttack.getDefendingTerritory().getOwnerID()
 
 
     def enterDefendingArmies(self, defendingArmiesNumber):
-
-
         self.cPhase.fight(defendingArmiesNumber)
 
     def startCombatPhase(self):

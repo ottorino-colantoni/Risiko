@@ -40,6 +40,7 @@ class combatPhase(object):
 
         self.currentAttack = Attack(attackingTerritory, defendingTerritory, attackingArmiesNumber)
 
+
     def fight(self, defendingArmiesNumber: int):
         print("Facciamo sto fight")
         if defendingArmiesNumber > 3:
