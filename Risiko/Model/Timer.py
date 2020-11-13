@@ -1,7 +1,6 @@
 from threading import Timer as thredingTimer
 import time
 
-
 class Timer:
 
     __instance = None
