@@ -9,7 +9,6 @@ class Round:
         self.__board = Board.getInstance()
         self.__roundPlayer = player
 
-
     def getBoard(self):
         return self.__board
 
@@ -20,11 +19,14 @@ class Round:
         return self.cPhase
 
     def enterAttackingTerritory(self, territoryID):
+
+        if self.cPhase.isFinished():
+            raise Exception("il timer è scaduto")
+
         try:
             return self.__board.getAttackableTerritories(territoryID)
         except:
             print("TERRITORIO D'ATTACCO NON CORRETTO!!!!")
-
 
     def confirmAttack(self, attackingTerritoryID, defendingTerritoryID, attackingArmiesNumber):
 
@@ -43,21 +45,17 @@ class Round:
         except:
             raise Exception("Errore nelle armate in attacco")
 
-        # TODO : needed for contact the client
-        return self.cPhase.currentAttack.getDefendingTerritory().getOwnerID()
-
+        # TODO: Notify defender player
 
     def enterDefendingArmies(self, defendingArmiesNumber):
+
         self.cPhase.fight(defendingArmiesNumber)
 
     def startCombatPhase(self):
 
-        #TODO: time remaining Timer !!!!
-        self.cPhase = combatPhase(500000)
+        # TODO: time remaining Timer !!!!
+        self.cPhase = combatPhase(30)
         return self.__board.getAttackingTerritories(self.__roundPlayer.getNickName())
 
-
     def endCombatPhase(self):
-        pass
-
-
+        self.cPhase.endCombatPhase()
