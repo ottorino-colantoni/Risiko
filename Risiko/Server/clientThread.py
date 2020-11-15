@@ -3,45 +3,36 @@ import pickle
 import asyncio
 
 
-async def retrieve_data(socket):
-    try:
-        data = socket.recv(2048).decode()
-        return data
-    except asyncio.CancelledError as error:
-     print(error)
-
-
-async def send_data(socket):
-    socket.send(str.encode("fuck off"))
-    return True
-
-
-
-async def push_game_state(game, socket):
+async def push_game_state(game, writer):
     try:
         while True:
-            await send_data(socket)
+            message = "PROVA"
+            writer.write(message.encode())
+            await writer.drain()
             await asyncio.sleep(1)
 
     except asyncio.CancelledError as error:
         print(error)
-
+    '''
     finally:
         socket.close()
+    '''
 
-
-async def update_from_client(game, socket):
+async def update_from_client(game, reader):
 
         while True:
-            message = await retrieve_data(socket)
+            data = await reader.read(100)
+            if data == "ciao":
+                print(f'ricevuto {data} da ')
             await asyncio.sleep(1)
-            print(message)
+
 
 
 async def main(game, socket):
 
-    taskB = asyncio.create_task(push_game_state(game, socket))
-    taskA = asyncio.create_task(update_from_client(game, socket))
+    reader, writer = await asyncio.open_connection(sock=socket)
+    taskB = asyncio.create_task(push_game_state(game, writer))
+    taskA = asyncio.create_task(update_from_client(game, reader))
 
     try:
         await asyncio.wait([taskB, taskA], return_when=asyncio.FIRST_COMPLETED)
@@ -59,6 +50,8 @@ class clientThread(threading.Thread):
         self.game = game
 
     def run(self):
+        # Register the open socket to wait for data.
+        #reader, writer = asyncio.open_connection(sock=self.socket)
         asyncio.run(main(self.game, self.socket))
 
 

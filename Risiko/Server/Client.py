@@ -1,7 +1,7 @@
 import socket
 import pickle
-import zmq
-import json
+#import zmq
+#import json
 
 
 class Client:
@@ -29,8 +29,8 @@ if __name__ == '__main__':
         try:
             data = client.socket.recv(2048).decode()
             print(data)
-            dataa = input("Scrivi qualcosa: ")
-            client.socket.send(str.encode(dataa))
+            message = input("inserisci il messaggio: ")
+
         except:
             pass
 
