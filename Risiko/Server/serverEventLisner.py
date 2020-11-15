@@ -6,7 +6,6 @@ class Eventlistner:
     def __init__(self):
         pass
 
-
     def splitString(self,string):
         if self.game.gameCanStart():
             data = string.split("/")
