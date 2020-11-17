@@ -1,9 +1,3 @@
-import socket
-import pickle
-#import zmq
-#import json
-
-
 class Client:
 
     def __init__(self, _serverIP: str, _serverPort: int ):
@@ -29,7 +23,6 @@ if __name__ == '__main__':
         try:
             data = client.socket.recv(2048).decode()
             print(data)
-            message = input("inserisci il messaggio: ")
 
         except:
             pass

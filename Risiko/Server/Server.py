@@ -1,4 +1,6 @@
 import socket
+from Risiko.Model.Player import Player
+from Risiko.Model.Game import Game
 from Risiko.Server.clientThread import clientThread
 
 
@@ -23,6 +25,20 @@ class Server:
 
 
 if __name__ == '__main__':
+
+    #TODO : only for test model
+
+    player4 = Player("Zar", "red")
+    player1 = Player("Livioski", "blu")
+    player2 = Player("Carlatt", "orange")
+    player3 = Player("bigFabbro", "yellow")
+    players = [player1, player2, player3, player4]
+    game = Game(players)
+
+
+
+    #TODO : to be modified
+
     server = Server("127.0.0.1", 6455)
     server.startServer(2)
 
