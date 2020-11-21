@@ -22,6 +22,9 @@ class combatPhase(object):
     def getAttacks(self):
         return self.__attacks
 
+    def getLastAttack(self):
+        return self.__attacks[-1]
+
     def getCurrentAttack(self):
         return self.__currentAttack
 
@@ -39,6 +42,7 @@ class combatPhase(object):
 
 
     def fight(self, defendingArmiesNumber: int):
+
         print("Facciamo sto fight")
         if defendingArmiesNumber > 3:
             raise Exception("Non puoi difendere con piu di 3 armate)")

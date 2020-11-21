@@ -11,16 +11,22 @@ class Server:
         self.serverIP = server_ip
         self.serverPort = server_port
 
-    def startServer(self, maxNumClient: int):
+    def startServer(self, maxNumClient: int, game):
 
             print('Server started, waiting for connection...')
             self.socket.bind((self.serverIP, self.serverPort))
             self.socket.listen(maxNumClient)
 
+            count_player = 0
             while True:
                 conn, addr = self.socket.accept()
-                client_thread = clientThread(conn)
+                game.set_player_socket(players[count_player], conn)
+                client_thread = clientThread(conn, players[count_player].getNickName(), game)
                 client_thread.start()
+                #la partita non inizierà se non ci sono tanti sockets quanti i players
+                game.gameStart()
+                count_player += 1
+
 
 
 
@@ -28,17 +34,15 @@ if __name__ == '__main__':
 
     #TODO : only for test model
 
-    player4 = Player("Zar", "red")
     player1 = Player("Livioski", "blu")
-    player2 = Player("Carlatt", "orange")
-    player3 = Player("bigFabbro", "yellow")
+    player2 = Player("Zar", "red")
+    player3 = Player("Carlatt", "orange")
+    player4 = Player("bigFabbro", "yellow")
     players = [player1, player2, player3, player4]
     game = Game(players)
 
 
-
     #TODO : to be modified
-
     server = Server("127.0.0.1", 6455)
-    server.startServer(2)
+    server.startServer(4, game)
 

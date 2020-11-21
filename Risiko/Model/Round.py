@@ -51,13 +51,15 @@ class Round:
         # TODO: Notify defender player
 
     def enterDefendingArmies(self, defendingArmiesNumber):
-
-        self.cPhase.fight(defendingArmiesNumber)
+        try:
+            self.cPhase.fight(defendingArmiesNumber)
+        except Exception as err:
+            raise Exception(err)
 
     def startCombatPhase(self):
 
         # TODO: time remaining Timer !!!!
-        self.cPhase = combatPhase(30)
+        self.cPhase = combatPhase(3000)
         return self.__board.getAttackingTerritories(self.__roundPlayer.getNickName())
 
     def endCombatPhase(self):

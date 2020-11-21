@@ -6,14 +6,15 @@ unlock_input = False
 
 def show_commands():
     print("Se sei di turno puoi scegliere tra i seguenti comandi: \n")
-    print("[]-[]-[]")
+    print("[startCPhase]-[enterAttackingTerritory/<territorioInAttacco>]-[confirmAttack/<territorioInAttacco>/<territorioDifensore>/<armateInAttacco>]")
 
 async def update_from_server(reader):
 
     while True:
-        data = await reader.read(100)
+        data = await reader.read(200)
+        data = data.decode("utf-8")
         print(data)
-        await asyncio.sleep(1)
+        await asyncio.sleep(0.1)
 
 async def send_message(writer):
     global unlock_input
@@ -21,7 +22,6 @@ async def send_message(writer):
         while True:
             if unlock_input:
                 mess = input("inserisci comando")
-
                 if mess == "help":
                     show_commands()
                 elif mess == "annulla":

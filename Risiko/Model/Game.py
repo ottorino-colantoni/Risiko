@@ -1,4 +1,4 @@
-from random import random
+from random import choice, random
 import hashlib
 from Risiko.Model.Board import Board
 from Risiko.Model.Round import Round
@@ -12,10 +12,17 @@ class Game:
         self.players = players
         self.rounds = []
         self.checksum = None
+        self.started = False
 
         #TODO : only for test
         self.playerSocket = {}
 
+    def set_player_socket(self,player,socket):
+
+        self.playerSocket[f'{player.getNickName()}'] = socket
+
+    def get_player_socket(self):
+        return self.playerSocket
 
     #TODO: to be modified
     def build_board(self):
@@ -25,24 +32,33 @@ class Game:
         for continent in board1.getContinentMap():
             for territory in board1.getContinentMap()[continent].getContinentTerritory():
                 board1.getContinentMap()[continent].getContinentTerritory()[territory].setArmiesNumber(5)
-                board1.getContinentMap()[continent].getContinentTerritory()[territory].setOwner(random.choice(self.players))
+                board1.getContinentMap()[continent].getContinentTerritory()[territory].setOwner(choice(self.players))
 
 
     def makeTurn(self):
         if self.rounds == []:
-            new_round = Round(random.choice(self.players))
+            new_round = Round(self.players[0])
             self.rounds.append(new_round)
         else:
-            new_round = Round(self.players[self.rounds.index(self.rounds[-1].getRoundPlayer() + 1)])
+            #TODO: Fare in modo che cicli su tutti i giocatori uno per uno
+            last_round_player = self.rounds[-1].getRoundPlayer()
+            new_round_player = self.players[(self.players.index(last_round_player) + 1) % len(self.players)]
+            new_round = Round(new_round_player)
             self.rounds.append(new_round)
 
     #TODO : to be modified?
-    def game_can_start(self):
+    def gameStart(self):
         if len(self.playerSocket) == len(self.players):
-            return True
+            self.build_board()
+            self.makeTurn()
+            self.started = True
         else:
             return False
+    def gameStarted(self):
+        return self.started
 
+    def getCurrentRound(self):
+        return self.rounds[-1]
 
     #TODO : it is necessary to understand what to send
     def toJason(self):

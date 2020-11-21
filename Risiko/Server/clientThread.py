@@ -1,15 +1,16 @@
 import threading
 import pickle
 import asyncio
+from Risiko.Server.serverEventListener import Eventlistener
 
 
-async def push_game_state(game, writer):
+async def push_game_state(eventListener, writer):
     try:
         while True:
-            message = "PROVA"
+            message = "keep alive\n"
             writer.write(message.encode())
             await writer.drain()
-            await asyncio.sleep(1)
+            await asyncio.sleep(60)
 
     except asyncio.CancelledError as error:
         print(error)
@@ -18,22 +19,24 @@ async def push_game_state(game, writer):
         socket.close()
     '''
 
-async def update_from_client(game, reader):
+async def update_from_client(eventListener, reader, writer):
 
         while True:
-            data = await reader.read(100)
-            # EventListener.manageRequest(data)
-            if data == "ciao":
-                print(f'ricevuto {data} da ')
+            data = await reader.read(200)
+            data = data.decode("utf-8")
+            data_to_send = eventListener.manageRequest(data)
+            print(f'in risposta a {data} mando {data_to_send}')
+            writer.write(data_to_send.encode())
+            await writer.drain()
             await asyncio.sleep(1)
 
 
 
-async def main(game, socket):
+async def main(eventListener, socket):
 
     reader, writer = await asyncio.open_connection(sock=socket)
-    taskB = asyncio.create_task(push_game_state(game, writer))
-    taskA = asyncio.create_task(update_from_client(game, reader))
+    taskB = asyncio.create_task(push_game_state(eventListener, writer))
+    taskA = asyncio.create_task(update_from_client(eventListener, reader, writer))
 
     try:
         await asyncio.wait([taskB, taskA], return_when=asyncio.FIRST_COMPLETED)
@@ -43,17 +46,15 @@ async def main(game, socket):
 
 class clientThread(threading.Thread):
 
-    def __init__(self, socket, player=None, game=None, eventlistner=None):
+    def __init__(self, socket, socketPlayer=None, game=None):
         threading.Thread.__init__(self)
         self.socket = socket
-        self.player = player
-        self.eventListener = eventlistner
+        self.eventListener = Eventlistener(game, socketPlayer)
         self.game = game
 
     def run(self):
         # Register the open socket to wait for data.
-        #reader, writer = asyncio.open_connection(sock=self.socket)
-        asyncio.run(main(self.game, self.socket))
+        asyncio.run(main(self.eventListener, self.socket))
 
 
 
