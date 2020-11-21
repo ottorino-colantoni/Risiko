@@ -1,3 +1,6 @@
+import socket
+
+
 class Client:
 
     def __init__(self, _serverIP: str, _serverPort: int ):
