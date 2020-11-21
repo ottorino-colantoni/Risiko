@@ -25,21 +25,24 @@ class Round:
 
         try:
             return self.__board.getAttackableTerritories(territoryID)
-        except:
-            print("TERRITORIO D'ATTACCO NON CORRETTO!!!!")
+        except Exception as err:
+            raise Exception(type(err).__name__)
+
+
+
 
     def confirmAttack(self, attackingTerritoryID, defendingTerritoryID, attackingArmiesNumber):
 
         try:
             atkTerritory = self.__board.findTerritory(attackingTerritoryID)
         except:
-            print("Il territorio d'attacco non è corretto")
-            return
+            raise Exception("Il territorio d'attacco non è corretto")
+
         try:
             dfnTerritory = self.__board.findTerritory(defendingTerritoryID)
         except:
-            print("Il territorio di difesa non è corretto")
-            return
+            raise Exception("Il territorio di difesa non è corretto")
+
         try:
             self.cPhase.makeAttack(atkTerritory, dfnTerritory, attackingArmiesNumber)
         except:

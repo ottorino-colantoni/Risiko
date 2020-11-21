@@ -22,6 +22,7 @@ async def update_from_client(game, reader):
 
         while True:
             data = await reader.read(100)
+            # EventListener.manageRequest(data)
             if data == "ciao":
                 print(f'ricevuto {data} da ')
             await asyncio.sleep(1)
