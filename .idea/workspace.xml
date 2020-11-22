@@ -20,14 +20,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c42b6947-4b2d-43b4-835e-57180a2db045" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Risiko/Server/msgCache.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Risiko/Model/Board.py" beforeDir="false" afterPath="$PROJECT_DIR$/Risiko/Model/Board.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Risiko/Model/Game.py" beforeDir="false" afterPath="$PROJECT_DIR$/Risiko/Model/Game.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Risiko/Model/Round.py" beforeDir="false" afterPath="$PROJECT_DIR$/Risiko/Model/Round.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Risiko/Model/classicBoardBuilder.py" beforeDir="false" afterPath="$PROJECT_DIR$/Risiko/Model/classicBoardBuilder.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Risiko/Model/combatPhase.py" beforeDir="false" afterPath="$PROJECT_DIR$/Risiko/Model/combatPhase.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Risiko/Server/Client.py" beforeDir="false" afterPath="$PROJECT_DIR$/Risiko/Server/Client.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Risiko/Server/Server.py" beforeDir="false" afterPath="$PROJECT_DIR$/Risiko/Server/Server.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Risiko/Server/clientThread.py" beforeDir="false" afterPath="$PROJECT_DIR$/Risiko/Server/clientThread.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Risiko/Server/serverEventListener.py" beforeDir="false" afterPath="$PROJECT_DIR$/Risiko/Server/serverEventListener.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Risiko/Server/serverEventListener.py" beforeDir="false" afterPath="$PROJECT_DIR$/Risiko/Server/requestHandler.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,12 +59,13 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="960" />
-    <option name="width" value="960" />
-    <option name="height" value="1035" />
+  <component name="ProjectId" id="1kdllzv3XdoWwljzqrdl6f3nXLK" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1605571655997" />
@@ -241,13 +245,14 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.Client" />
         <item itemvalue="Python.Server" />
+        <item itemvalue="Python.Client" />
         <item itemvalue="Python.roundTest" />
         <item itemvalue="Python.pyclient" />
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -298,41 +303,54 @@
     <option name="version" value="1" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1877" height="218" key="GridCell.Tab.0.bottom" timestamp="1605979015698">
+    <state x="717" y="342" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1606042706464">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="218" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1605979015698" />
-    <state width="1877" height="218" key="GridCell.Tab.0.center" timestamp="1605979015698">
+    <state x="717" y="342" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1606042706464" />
+    <state width="1877" height="346" key="GridCell.Tab.0.bottom" timestamp="1606039191708">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="218" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1605979015698" />
-    <state width="1877" height="218" key="GridCell.Tab.0.left" timestamp="1605979015698">
+    <state width="1877" height="346" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1606039191708" />
+    <state width="1877" height="346" key="GridCell.Tab.0.center" timestamp="1606039191708">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="218" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1605979015698" />
-    <state width="1877" height="218" key="GridCell.Tab.0.right" timestamp="1605979015698">
+    <state width="1877" height="346" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1606039191708" />
+    <state width="1877" height="346" key="GridCell.Tab.0.left" timestamp="1606039191708">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="218" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1605979015698" />
-    <state width="1877" height="191" key="GridCell.Tab.1.bottom" timestamp="1605971041989">
+    <state width="1877" height="346" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1606039191708" />
+    <state width="1877" height="346" key="GridCell.Tab.0.right" timestamp="1606039191708">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="191" key="GridCell.Tab.1.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1605971041989" />
-    <state width="1877" height="191" key="GridCell.Tab.1.center" timestamp="1605971041989">
+    <state width="1877" height="346" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1606039191708" />
+    <state width="1877" height="191" key="GridCell.Tab.1.bottom" timestamp="1605983638754">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="191" key="GridCell.Tab.1.center/0.0.1920.1080@0.0.1920.1080" timestamp="1605971041989" />
-    <state width="1877" height="191" key="GridCell.Tab.1.left" timestamp="1605971041989">
+    <state width="1877" height="191" key="GridCell.Tab.1.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1605983638754" />
+    <state width="1877" height="191" key="GridCell.Tab.1.center" timestamp="1605983638753">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="191" key="GridCell.Tab.1.left/0.0.1920.1080@0.0.1920.1080" timestamp="1605971041989" />
-    <state width="1877" height="191" key="GridCell.Tab.1.right" timestamp="1605971041989">
+    <state width="1877" height="191" key="GridCell.Tab.1.center/0.0.1920.1080@0.0.1920.1080" timestamp="1605983638753" />
+    <state width="1877" height="191" key="GridCell.Tab.1.left" timestamp="1605983638753">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="191" key="GridCell.Tab.1.right/0.0.1920.1080@0.0.1920.1080" timestamp="1605971041989" />
+    <state width="1877" height="191" key="GridCell.Tab.1.left/0.0.1920.1080@0.0.1920.1080" timestamp="1605983638753" />
+    <state width="1877" height="191" key="GridCell.Tab.1.right" timestamp="1605983638754">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1877" height="191" key="GridCell.Tab.1.right/0.0.1920.1080@0.0.1920.1080" timestamp="1605983638754" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">

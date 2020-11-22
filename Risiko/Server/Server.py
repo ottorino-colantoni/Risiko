@@ -28,21 +28,19 @@ class Server:
                 count_player += 1
 
 
-
-
 if __name__ == '__main__':
 
     #TODO : only for test model
+    player1 = Player("Zar", "red")
+    player2 = Player("Livioski", "blu")
 
-    player1 = Player("Livioski", "blu")
-    player2 = Player("Zar", "red")
-    player3 = Player("Carlatt", "orange")
-    player4 = Player("bigFabbro", "yellow")
-    players = [player1, player2, player3, player4]
+    #player3 = Player("Carlatt", "orange")
+    #player4 = Player("bigFabbro", "yellow")
+    players = [player1, player2]
     game = Game(players)
 
 
     #TODO : to be modified
-    server = Server("127.0.0.1", 6455)
+    server = Server("25.105.194.153", 6455)
     server.startServer(4, game)
 

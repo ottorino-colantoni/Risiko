@@ -14,7 +14,7 @@ class Game:
         self.checksum = None
         self.started = False
 
-        #TODO : only for test
+        #dizionario chiave = giocatore, valore = socketAssociata
         self.playerSocket = {}
 
     def set_player_socket(self,player,socket):
@@ -33,7 +33,6 @@ class Game:
             for territory in board1.getContinentMap()[continent].getContinentTerritory():
                 board1.getContinentMap()[continent].getContinentTerritory()[territory].setArmiesNumber(5)
                 board1.getContinentMap()[continent].getContinentTerritory()[territory].setOwner(choice(self.players))
-
 
     def makeTurn(self):
         if self.rounds == []:
@@ -54,6 +53,7 @@ class Game:
             self.started = True
         else:
             return False
+
     def gameStarted(self):
         return self.started
 

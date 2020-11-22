@@ -40,7 +40,6 @@ class combatPhase(object):
 
         self.__currentAttack = Attack(attackingTerritory, defendingTerritory, attackingArmiesNumber)
 
-
     def fight(self, defendingArmiesNumber: int):
 
         print("Facciamo sto fight")

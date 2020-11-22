@@ -8,7 +8,6 @@ class classicBoardBuilder(boardBuilder):
         self.__board = {}
         self.__mapId = "Terra"
 
-
     def buildContinents(self):
         continent1 = Continent("Europa")
         # continent2 = Continent("Nord America")
@@ -96,7 +95,6 @@ class classicBoardBuilder(boardBuilder):
 
         # add to Continent Europe
         self.__board['Europa'].addTerritory([territoryE1, territoryE2, territoryE3, territoryE4, territoryE5, territoryE6, territoryE7])
-
 
     def getBoard(self):
         return self.__board

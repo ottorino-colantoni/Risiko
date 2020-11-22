@@ -2,14 +2,11 @@ import pickle
 import time
 
 
-class Eventlistener:
-
-    # fase/attributo1/attributo2...
+class RequestHandler:
 
     def __init__(self, game, socketPlayer):
         self.game = game
         self.socketPlayer = socketPlayer
-
 
     def manageRequest(self, string):
         if self.game.gameStarted():
@@ -27,6 +24,7 @@ class Eventlistener:
                     dts = self.endCombatPhase()
                 else:
                     dts = "Comando non corretto"
+
             else:
                 #COSE CHE PUO FARE IL GIOCATORE NON DI TURNO
                 if data[0] == "defending":
@@ -34,12 +32,10 @@ class Eventlistener:
                         dts = self.setDefendingArmies(int(data[1]))
                 else:
                     dts = "Non sei di turno"
+
             return dts
         else:
             return "Waiting for more player\n"
-
-    # def setGame(self, game):
-    #     self.game = game
 
     def startCPhase(self):
 
@@ -70,10 +66,9 @@ class Eventlistener:
             else:
                 data_to_send = "Non puoi attaccare nessun territorio da qui\n"
         except Exception as err:
-            data_to_send = err
+            data_to_send = str(err)
 
         return data_to_send
-
 
     def confirmAttack(self, attackingTerritoryID, defendingTerritoryID, armies):
         #TODO SE STO IN ATTESA DI UN DIFENSORE NON POSSO FARE UN ALTRO ATTACCO (O NIENTE INSOMMA)
@@ -83,7 +78,7 @@ class Eventlistener:
             self.__notifyDefPlayer(attackingTerritoryID, defendingTerritoryID, armies)
             data_to_send = "In attesa del difensore..."
         except Exception as err:
-            data_to_send = err
+            data_to_send = str(err)
 
         return data_to_send
 
@@ -97,6 +92,7 @@ class Eventlistener:
         defPlayerSocket.send(data_to_send.encode())
 
     def setDefendingArmies(self, armies):
+        data_to_send = ""
         try:
             self.game.getCurrentRound().enterDefendingArmies(armies)
             #TODO (?) IN TEORIA CI SERVE QUALCUNO CHE DECIDA CHE IL RISULTATO DELL'ATTACCO VADA A TUTTI (PER ORA E' IL LISTENER STESSO)
@@ -105,10 +101,11 @@ class Eventlistener:
             for player in self.game.get_player_socket():
                 self.game.get_player_socket()[player].send(data_to_send.encode())
             data_to_send = ""
-            return data_to_send
 
         except Exception as err:
-            data_to_send = err
+            data_to_send = str(err)
+
+        return data_to_send
 
     def endCombatPhase(self):
         self.game.makeTurn()
@@ -119,4 +116,3 @@ class Eventlistener:
 
         data_to_send = ""
         return data_to_send
-

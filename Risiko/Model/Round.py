@@ -26,10 +26,7 @@ class Round:
         try:
             return self.__board.getAttackableTerritories(territoryID)
         except Exception as err:
-            raise Exception(type(err).__name__)
-
-
-
+            raise err
 
     def confirmAttack(self, attackingTerritoryID, defendingTerritoryID, attackingArmiesNumber):
 

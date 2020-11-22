@@ -28,14 +28,12 @@ class Board:
             self.__mapId = self.__boardBuilder.getMapId()
             Board.__instance = self
 
-
     def printBoard(self):
         for key in self.__continetMap:
             print(key)
             for territory in self.__continetMap[key].getContinentTerritory():
                 print(str(key) + " " + str(territory) + " " + str(self.__continetMap[key].getContinentTerritory()[territory].getOwner().getNickName())
                       + " " + str(self.__continetMap[key].getContinentTerritory()[territory].getArmiesNumber()))
-
 
     def getContinentMap(self):
         return self.__continetMap
@@ -48,7 +46,6 @@ class Board:
 
     def setMapId(self, newId):
         self.__mapId = newId
-
 
     def getAttackingTerritories(self, playerID):
         # TODO: modify for fun
@@ -88,7 +85,6 @@ class Board:
                 attackableTerritories.append(neighbor)
 
         return attackableTerritories
-
 
     def findTerritory(self, territoryID):
         find = None
