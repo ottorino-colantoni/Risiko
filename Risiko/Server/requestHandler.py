@@ -4,36 +4,35 @@ import time
 
 class RequestHandler:
 
-    def __init__(self, game, socketPlayer):
+    def __init__(self, game, player, msgCache):
         self.game = game
-        self.socketPlayer = socketPlayer
+        self.player = player
+        self.msgCache = msgCache
 
     def manageRequest(self, string):
         if self.game.gameStarted():
             data = string.split("/")
-            if self.socketPlayer == self.game.getCurrentRound().getRoundPlayer().getNickName():
+            if self.player == self.game.getCurrentRound().getRoundPlayer().getNickName():
                 if data[0] == "startCPhase":
-                    dts = self.startCPhase()
+                    self.startCPhase()
                 elif data[0] == "enterAttackingTerritory":
                     if len(data) == 2:
-                        dts = self.enterAttackingTerritory(data[1])
+                        self.enterAttackingTerritory(data[1])
                 elif data[0] == "confirmAttack":
                     if len(data) == 4:
-                        dts = self.confirmAttack(data[1], data[2], int(data[3]))
+                        self.confirmAttack(data[1], data[2], int(data[3]))
                 elif data[0] == "endCPhase":
-                    dts = self.endCombatPhase()
+                    self.endCombatPhase()
                 else:
-                    dts = "Comando non corretto"
+                    self.msgCache.putMsg("Comando non corretto", self.player)
 
             else:
                 #COSE CHE PUO FARE IL GIOCATORE NON DI TURNO
                 if data[0] == "defending":
                     if len(data) == 2:
-                        dts = self.setDefendingArmies(int(data[1]))
+                        self.setDefendingArmies(int(data[1]))
                 else:
-                    dts = "Non sei di turno"
-
-            return dts
+                    self.msgCache.putMsg("Non sei di turno", self.player)
         else:
             return "Waiting for more player\n"
 
@@ -50,7 +49,7 @@ class RequestHandler:
             for territory in playerTerritories:
                 data_to_send += f'{territory.getNameID()}[{territory.getArmiesNumber()}]\n'
 
-        return data_to_send
+        self.msgCache.putMsg(data_to_send, self.player)
 
     def enterAttackingTerritory(self, territoryID):
         data_to_send = ""
@@ -68,7 +67,7 @@ class RequestHandler:
         except Exception as err:
             data_to_send = str(err)
 
-        return data_to_send
+        self.msgCache.putMsg(data_to_send, self.player)
 
     def confirmAttack(self, attackingTerritoryID, defendingTerritoryID, armies):
         #TODO SE STO IN ATTESA DI UN DIFENSORE NON POSSO FARE UN ALTRO ATTACCO (O NIENTE INSOMMA)
@@ -80,39 +79,37 @@ class RequestHandler:
         except Exception as err:
             data_to_send = str(err)
 
-        return data_to_send
+        self.msgCache.putMsg(data_to_send, self.player)
 
     def __notifyDefPlayer(self, attackingTerritoryID, defendingTerritoryID, armies):
         board = self.game.getCurrentRound().getBoard()
         defTerritory = board.findTerritory(defendingTerritoryID)
-        defPlayer = defTerritory.getOwner()
-        defPlayerSocket = self.game.playerSocket[defPlayer.getNickName()]
+        defPlayerID = defTerritory.getOwnerID()
         atkPlayer = self.game.getCurrentRound().getRoundPlayer()
         data_to_send = f'Il giocatore {atkPlayer.getNickName()} ti sta attaccando da {attackingTerritoryID} a {defendingTerritoryID} con {armies} armate\n'
-        defPlayerSocket.send(data_to_send.encode())
+        self.msgCache.putMsg(data_to_send, defPlayerID)
+
 
     def setDefendingArmies(self, armies):
-        data_to_send = ""
         try:
             self.game.getCurrentRound().enterDefendingArmies(armies)
             #TODO (?) IN TEORIA CI SERVE QUALCUNO CHE DECIDA CHE IL RISULTATO DELL'ATTACCO VADA A TUTTI (PER ORA E' IL LISTENER STESSO)
             data_to_send = self.game.getCurrentRound().getCombatPhase().getLastAttack().getResult().__repr__()
 
-            for player in self.game.get_player_socket():
-                self.game.get_player_socket()[player].send(data_to_send.encode())
-            data_to_send = ""
+            for player in self.game.players:
+                self.msgCache.putMsg(data_to_send, player.getNickName())
 
         except Exception as err:
             data_to_send = str(err)
+            self.msgCache.putMsg(data_to_send, self.player)
 
-        return data_to_send
+
 
     def endCombatPhase(self):
         self.game.makeTurn()
-        data_to_send = f'Ora è il turno di {self.game.getCurrentRound().getRoundPlayer().getNickName()} \n'
         #TODO MANDARE QUESTO MESSAGGIO A TUTTI TRANNE CHE AL GIOCATORE ASSOCIATO ALLA SOCKET
-        for player in self.game.get_player_socket():
-            self.game.get_player_socket()[player].send(data_to_send.encode())
-
-        data_to_send = ""
-        return data_to_send
+        for player in self.game.players:
+            if player.getNickName != self.game.getCurrentRound().getRoundPlayer().getNickName():
+                self.msgCache.putMsg(f'Ora è il turno di {self.game.getCurrentRound().getRoundPlayer().getNickName()} \n', player.getNickName())
+            else:
+                self.msgCache.putMsg("E' il tuo turno", player.getNickName())
