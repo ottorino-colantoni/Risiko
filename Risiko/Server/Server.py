@@ -2,7 +2,7 @@ import socket
 from Risiko.Model.Player import Player
 from Risiko.Model.Game import Game
 from Risiko.Server.clientThread import clientThread
-
+from Risiko.Server.msgCache import MsgCache
 
 class Server:
 
@@ -21,7 +21,7 @@ class Server:
             while True:
                 conn, addr = self.socket.accept()
                 game.set_player_socket(players[count_player], conn)
-                client_thread = clientThread(conn, players[count_player].getNickName(), game)
+                client_thread = clientThread(conn, msgCache, players[count_player].getNickName(), game)
                 client_thread.start()
                 #la partita non inizierà se non ci sono tanti sockets quanti i players
                 game.gameStart()
@@ -33,14 +33,14 @@ if __name__ == '__main__':
     #TODO : only for test model
     player1 = Player("Zar", "red")
     player2 = Player("Livioski", "blu")
-
     #player3 = Player("Carlatt", "orange")
     #player4 = Player("bigFabbro", "yellow")
+    msgCache = MsgCache()
     players = [player1, player2]
     game = Game(players)
 
 
     #TODO : to be modified
-    server = Server("25.105.194.153", 6455)
+    server = Server("127.0.0.1", 6455)
     server.startServer(4, game)
 

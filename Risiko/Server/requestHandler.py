@@ -34,7 +34,7 @@ class RequestHandler:
                 else:
                     self.msgCache.putMsg("Non sei di turno", self.player)
         else:
-            return "Waiting for more player\n"
+            self.msgCache.putMsg("Waiting for more players", self.player)
 
     def startCPhase(self):
 

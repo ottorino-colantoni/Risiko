@@ -1,4 +1,3 @@
-import socket
 import asyncio
 from pynput import keyboard
 
@@ -49,7 +48,7 @@ async def main(serverIP, serverPort_P):
 def on_press(key):
     global unlock_input
     try:
-        if key.char == "e":
+        if key.char == 'e':
             unlock_input = True
     except:
         pass
@@ -67,7 +66,7 @@ class Client:
 
 if __name__ == '__main__':
 
-    client = Client("25.105.194.153", 6455)
+    client = Client("127.0.0.1", 6455)
     client.run()
 
 

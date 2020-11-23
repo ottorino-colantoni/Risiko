@@ -10,8 +10,9 @@ class MsgCache:
 
     def checkMsg(self, player):
         isMine = False
-        if self.msgQueue[0][1] == player:
-            isMine = True
+        if self.msgQueue.empty() == False:
+            if self.msgQueue.queue[0][1] == player:
+                isMine = True
         return isMine
 
     def getMsg(self):

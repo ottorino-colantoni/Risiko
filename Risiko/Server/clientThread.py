@@ -21,9 +21,7 @@ async def update_from_client(requestHandler, reader, writer):
         while True:
             data = await reader.read(200)
             data = data.decode("utf-8")
-            data_to_send = requestHandler.manageRequest(data)
-            print(f'in risposta a {data} mando: {data_to_send}')
-            writer.write(data_to_send.encode())
+            requestHandler.manageRequest(data)
             await writer.drain()
             await asyncio.sleep(1)
 
@@ -43,7 +41,7 @@ class clientThread(threading.Thread):
     def __init__(self, socket, msgCache, playerID, game):
         threading.Thread.__init__(self)
         self.socket = socket
-        self.playerID
+        self.playerID = playerID
         self.requestHandler = RequestHandler(game, playerID, msgCache)
         self.game = game
         self.msgCache = msgCache
