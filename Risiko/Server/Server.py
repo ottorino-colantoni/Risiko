@@ -32,15 +32,15 @@ if __name__ == '__main__':
 
     #TODO : only for test model
     player1 = Player("Zar", "red")
-    player2 = Player("Livioski", "blu")
-    #player3 = Player("Carlatt", "orange")
+    player2 = Player("Livioski", "black")
+    player3 = Player("Carlatt", "yellow")
     #player4 = Player("bigFabbro", "yellow")
     msgCache = MsgCache()
-    players = [player1, player2]
+    players = [player1, player2, player3]
     game = Game(players)
 
 
     #TODO : to be modified
-    server = Server("127.0.0.1", 6455)
-    server.startServer(2, game)
+    server = Server("25.105.194.153", 6455)
+    server.startServer(3, game)
 

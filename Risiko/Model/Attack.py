@@ -63,7 +63,7 @@ class Attack:
         atkArmiesLost  = self.result.atkLosses
         atkTerritoryArmies = self.attackingTerritory.getArmiesNumber()
 
-        if(armiesNumber >= (self.attackingArmies-atkArmiesLost) & armiesNumber < atkTerritoryArmies):
+        if(armiesNumber >= (self.attackingArmies-atkArmiesLost) and armiesNumber < atkTerritoryArmies):
             self.attackingTerritory.modifyTerritoryArmies(armiesNumber)
             self.defendingTerritory.setArmiesNumber(armiesNumber)
             return True

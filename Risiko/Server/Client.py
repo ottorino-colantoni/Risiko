@@ -69,7 +69,7 @@ class Client:
 
 if __name__ == '__main__':
 
-    client = Client("127.0.0.1", 6455)
+    client = Client("25.105.194.153", 6455)
     client.run()
 
 
