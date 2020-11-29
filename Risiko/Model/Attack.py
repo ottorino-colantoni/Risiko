@@ -45,11 +45,8 @@ class Attack:
 
         if conquered:
             self.defendingTerritory.setOwner(self.attackingTerritory.getOwner())
-            #ASK TO THE ATTACKING PLAYER HOW MANY ARMIES HE WANTS TO MOVE TO THE CONQUERED TERRITORY
-            #AT THE MOMENT HE MOVES ALL THE REMAINING ATK ARMIES FROM THE FIGHT
-            movedArmies = self.attackingArmies-atkLosses
-            self.attackingTerritory.modifyTerritoryArmies(movedArmies)
-            self.defendingTerritory.setArmiesNumber(movedArmies)
+            self.attackingTerritory.modifyTerritoryArmies(atkLosses)
+            self.defendingTerritory.setArmiesNumber(0)
 
         else:
             self.attackingTerritory.modifyTerritoryArmies(atkLosses)
@@ -59,6 +56,22 @@ class Attack:
         self.result = Result(atkLosses, defLosses, conquered)
 
         return self.result
+
+
+    def conquerMovement(self, armiesNumber):
+
+        atkArmiesLost  = self.result.atkLosses
+        atkTerritoryArmies = self.attackingTerritory.getArmiesNumber()
+
+        if(armiesNumber >= (self.attackingArmies-atkArmiesLost) & armiesNumber < atkTerritoryArmies):
+            self.attackingTerritory.modifyTerritoryArmies(armiesNumber)
+            self.defendingTerritory.setArmiesNumber(armiesNumber)
+            return True
+        else:
+            if(armiesNumber < (self.attackingArmies-atkArmiesLost)):
+                raise Exception(f'Devi spostare almeno {self.attackingArmies-atkArmiesLost}')
+            else:
+                raise Exception(f'Puoi spostare al massimo {atkTerritoryArmies-1}')
 
 
 

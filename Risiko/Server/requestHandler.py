@@ -21,6 +21,9 @@ class RequestHandler:
                 elif data[0] == "confirmAttack":
                     if len(data) == 4:
                         self.confirmAttack(data[1], data[2], int(data[3]))
+                elif data[0] == "setConquerArmies":
+                    if len(data) == 2:
+                        self.setArmiesToMoveAfterConquer(int(data[1]))
                 elif data[0] == "endCPhase":
                     self.endCombatPhase()
                 else:
@@ -94,14 +97,32 @@ class RequestHandler:
         try:
             self.game.getCurrentRound().enterDefendingArmies(armies)
             #TODO (?) IN TEORIA CI SERVE QUALCUNO CHE DECIDA CHE IL RISULTATO DELL'ATTACCO VADA A TUTTI (PER ORA E' IL LISTENER STESSO)
-            data_to_send = self.game.getCurrentRound().getCombatPhase().getLastAttack().getResult().__repr__()
+            result = self.game.getCurrentRound().getCombatPhase().getLastAttack().getResult()
+            data_to_send = result.__repr__()
 
             for player in self.game.players:
                 self.msgCache.putMsg(data_to_send, player.getNickName())
 
+            if result.conquered:
+                self.msgCache.putMsg("Hai conquistato il territorio! Quante armate vuoi spostare?", self.game.
+                                     getCurrentRound().getRoundPlayer().getNickName())
+
+
         except Exception as err:
             data_to_send = str(err)
             self.msgCache.putMsg(data_to_send, self.player)
+
+
+    def setArmiesToMoveAfterConquer(self, armies):
+
+        try:
+            self.game.getCurrentRound().conquer(armies)
+            data_to_send = str("Spostamento effettuato!")
+        except Exception as err:
+            data_to_send = str(err)
+
+        self.msgCache.putMsg(data_to_send, self.player)
+
 
 
 

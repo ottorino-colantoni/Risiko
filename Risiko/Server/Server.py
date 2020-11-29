@@ -42,5 +42,5 @@ if __name__ == '__main__':
 
     #TODO : to be modified
     server = Server("127.0.0.1", 6455)
-    server.startServer(4, game)
+    server.startServer(2, game)
 

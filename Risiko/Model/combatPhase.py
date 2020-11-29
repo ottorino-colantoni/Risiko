@@ -60,5 +60,14 @@ class combatPhase(object):
 
         self.__timer.resumeTimer(self.__endPhase)
 
+
+    def makeMovement(self, armiesToMove):
+
+        self.__currentAttack.conquerMovement(armiesToMove)
+
+
+
+
+
     def endCombatPhase(self):
         self.__timer.stopTimer()

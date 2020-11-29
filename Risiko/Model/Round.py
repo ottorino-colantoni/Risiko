@@ -59,5 +59,9 @@ class Round:
         self.cPhase = combatPhase(3000)
         return self.__board.getAttackingTerritories(self.__roundPlayer.getNickName())
 
+    def conquer(self, armiesNumber):
+
+        self.cPhase.makeMovement(armiesNumber)
+
     def endCombatPhase(self):
         self.cPhase.endCombatPhase()
