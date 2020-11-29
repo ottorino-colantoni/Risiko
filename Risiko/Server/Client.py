@@ -5,7 +5,10 @@ unlock_input = False
 
 def show_commands():
     print("Se sei di turno puoi scegliere tra i seguenti comandi: \n")
-    print("[startCPhase]-[enterAttackingTerritory/<territorioInAttacco>]-[confirmAttack/<territorioInAttacco>/<territorioDifensore>/<armateInAttacco>]")
+    print('''[startCPhase] - [enterAttackingTerritory/<territorioInAttacco>] - [confirmAttack/<territorioInAttacco>/<territorioDifensore>/<armateInAttacco>] \n)
+             [setConquerArmies/<numeroArmate>] - [endCPhase] \n''')
+    print('''Se sei il giocatore non di turno \n se sei difensore: [defending/<numeroArmateInDifesa>]''')
+
 
 async def update_from_server(reader):
 
